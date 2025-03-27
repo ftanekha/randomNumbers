@@ -1,5 +1,8 @@
 document.addEventListener(
     'DOMContentLoaded', ()=> {
+        const getLuckyText = 'get lucky!'
+        const goodLuckText = 'good luck!'
+
         function displayNumbers(){
             function getRandomNumbers(max: number, maxLines = 5):number[][] {
                 //create a line of unique numbers
@@ -47,6 +50,26 @@ document.addEventListener(
             )
 
             document.getElementById('numbers-container').style.height = '500px'
+
+            const timer = setTimeout(
+                ()=> {
+                    const button = document.getElementById('get-lucky')
+                    if(button.textContent === getLuckyText) {
+                        button.textContent = goodLuckText
+                        button.classList.replace('text-gray-300', 'text-amber-500')
+                    }
+
+                    setTimeout(
+                        ()=> {
+                            button.textContent = getLuckyText
+                            button.classList.replace('text-amber-500', 'text-gray-300')
+                            clearTimeout(timer)
+                        },
+                        10000
+                    )
+                }, 
+                2000
+            )
         }
         const getLucky = document.getElementById('get-lucky')
         getLucky.addEventListener(

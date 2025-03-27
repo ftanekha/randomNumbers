@@ -8,6 +8,8 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 document.addEventListener('DOMContentLoaded', function () {
+    var getLuckyText = 'get lucky!';
+    var goodLuckText = 'good luck!';
     function displayNumbers() {
         function getRandomNumbers(max, maxLines) {
             if (maxLines === void 0) { maxLines = 5; }
@@ -48,6 +50,18 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
         document.getElementById('numbers-container').style.height = '500px';
+        var timer = setTimeout(function () {
+            var button = document.getElementById('get-lucky');
+            if (button.textContent === getLuckyText) {
+                button.textContent = goodLuckText;
+                button.classList.replace('text-gray-300', 'text-amber-500');
+            }
+            setTimeout(function () {
+                button.textContent = getLuckyText;
+                button.classList.replace('text-amber-500', 'text-gray-300');
+                clearTimeout(timer);
+            }, 10000);
+        }, 2000);
     }
     var getLucky = document.getElementById('get-lucky');
     getLucky.addEventListener('click', displayNumbers);
