@@ -1,0 +1,4 @@
+#numbers-container{
+    transition: .5s;
+    height: 0px;
+}
