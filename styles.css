@@ -1,4 +1,4 @@
-#numbers-container{
+#numbers-container, #sub-numbers-container{
     transition: .5s;
     height: 0px;
 }
