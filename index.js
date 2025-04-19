@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     var getLucky = document.getElementById('get-lucky');
     getLucky.addEventListener('click', displayNumbers);
-    // /////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////
     function subDisplayNumbers() {
         function getRandomNumbers(max, maxLines) {
             if (maxLines === void 0) { maxLines = 5; }
@@ -73,16 +73,28 @@ document.addEventListener('DOMContentLoaded', function () {
             function getLine(array) {
                 if (array === void 0) { array = []; }
                 var myNumbers = __spreadArray([], array, true);
-                if (myNumbers.length >= 5)
+                if (myNumbers.length >= 7)
                     return myNumbers;
                 var nextNumber = Math.ceil(Math.random() * max);
-                //enforce uniqueness
-                if (myNumbers.includes(nextNumber)) {
-                    return getLine(myNumbers);
+                if (myNumbers.length < 3) {
+                    //enforce uniqueness & length for firsst 2 numbers
+                    if (myNumbers.includes(nextNumber) || nextNumber >= 12) {
+                        return getLine(myNumbers);
+                    }
+                    else {
+                        myNumbers.push(nextNumber);
+                        return getLine(myNumbers);
+                    }
                 }
                 else {
-                    myNumbers.push(nextNumber);
-                    return getLine(myNumbers);
+                    //enforce uniqueness
+                    if (myNumbers.includes(nextNumber)) {
+                        return getLine(myNumbers);
+                    }
+                    else {
+                        myNumbers.push(nextNumber);
+                        return getLine(myNumbers);
+                    }
                 }
             }
             var ticket = [];
@@ -100,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
             //render the lines
             line.forEach(function (number) {
                 var listItem = document.createElement('li');
-                listItem.className = "w-1/6 bg-gray-".concat(11 - index, "00 text-gray-").concat(index + 1, "00 font-black text-lg text-center border-b-4 border-gray-").concat(index + 2, "00");
+                listItem.className = "w-32 bg-gray-".concat(11 - index, "00 text-gray-").concat(index + 1, "00 font-black text-lg text-center border-b-4 border-gray-").concat(index + 2, "00");
                 listItem.textContent = String(number);
                 targetEl === null || targetEl === void 0 ? void 0 : targetEl.append(listItem);
             });

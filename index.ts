@@ -82,15 +82,26 @@ document.addEventListener(
                 function getLine(array: number[] = []):number[]{
                     let myNumbers = [...array]
     
-                    if(myNumbers.length >= 5) return myNumbers
-    
+                    if(myNumbers.length >= 7) return myNumbers
+
                     const nextNumber = Math.ceil(Math.random() * max)
-                    //enforce uniqueness
-                    if(myNumbers.includes(nextNumber)) {
-                        return getLine(myNumbers)
+    
+                    if(myNumbers.length < 3){                    
+                        //enforce uniqueness & length for firsst 2 numbers
+                        if(myNumbers.includes(nextNumber) || nextNumber >= 12) {
+                            return getLine(myNumbers)
+                        }else{
+                            myNumbers.push(nextNumber)
+                            return getLine(myNumbers)
+                        }
                     }else{
-                        myNumbers.push(nextNumber)
-                        return getLine(myNumbers)
+                        //enforce uniqueness
+                        if(myNumbers.includes(nextNumber)) {
+                            return getLine(myNumbers)
+                        }else{
+                            myNumbers.push(nextNumber)
+                            return getLine(myNumbers)
+                        }
                     }
                 }
                 
@@ -113,7 +124,7 @@ document.addEventListener(
                     line.forEach(
                         number => {
                             const listItem = document.createElement('li')
-                            listItem.className = `w-1/6 bg-gray-${11 - index}00 text-gray-${index + 1}00 font-black text-lg text-center border-b-4 border-gray-${index + 2}00`
+                            listItem.className = `w-32 bg-gray-${11 - index}00 text-gray-${index + 1}00 font-black text-lg text-center border-b-4 border-gray-${index + 2}00`
                             listItem.textContent = String(number)
                             
                             targetEl?.append(listItem)
